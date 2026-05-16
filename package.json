@@ -10,9 +10,14 @@
     "test": "turbo run test"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@vitejs/plugin-react": "^6.0.2",
+    "jsdom": "^29.1.1",
     "prettier": "^3.7.4",
     "turbo": "^2.9.14",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "^4.1.6"
   },
   "engines": {
     "node": ">=18"
