@@ -12,7 +12,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps) {
   const resolvedParams = await params;
   const chapterNumber = parseInt(resolvedParams.chapterNumber, 10);
-  const chapter = getChapter(resolvedParams.slug, chapterNumber);
+  const chapter = await getChapter(resolvedParams.slug, chapterNumber).catch(() => null);
   
   if (!chapter) {
     return { title: 'Chapter Not Found' };
@@ -29,9 +29,11 @@ export default async function ChapterPage({ params }: PageProps) {
   const slug = resolvedParams.slug;
   const chapterNum = parseInt(resolvedParams.chapterNumber, 10);
   
-  const novel = getNovel(slug);
-  const chapter = getChapter(slug, chapterNum);
-  const adjacent = getAdjacentChapters(slug, chapterNum);
+  const [novel, chapter, adjacent] = await Promise.all([
+    getNovel(slug),
+    getChapter(slug, chapterNum),
+    getAdjacentChapters(slug, chapterNum)
+  ]);
 
   if (!novel || !chapter) {
     notFound();

@@ -12,7 +12,7 @@ interface ReaderLayoutProps {
   novelSlug: string;
   title: string;
   content: string[];
-  allChapters: Chapter[];
+  allChapters: Pick<Chapter, 'id' | 'chapterNumber' | 'title'>[];
   currentChapterNumber: number;
   prevChapter: number | null;
   nextChapter: number | null;

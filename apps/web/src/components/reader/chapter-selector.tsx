@@ -14,7 +14,7 @@ import { Chapter } from "@/lib/reader/mock-novel";
 
 interface ChapterSelectorProps {
   novelSlug: string;
-  chapters: Chapter[];
+  chapters: Pick<Chapter, 'id' | 'chapterNumber' | 'title'>[];
   currentChapterNumber: number;
 }
 
@@ -44,13 +44,13 @@ export function ChapterSelector({
           {chapters.map((chapter) => (
             <Link
               key={chapter.id}
-              href={`/novel/${novelSlug}/chapter/${chapter.number}`}
+              href={`/novel/${novelSlug}/chapter/${chapter.chapterNumber}`}
               prefetch={true}
               onClick={() => setOpen(false)}
               className={cn(
                 buttonVariants({ variant: "ghost" }),
                 "w-full justify-start font-normal text-sm",
-                chapter.number === currentChapterNumber
+                chapter.chapterNumber === currentChapterNumber
                   ? "bg-accent text-accent-foreground"
                   : "text-muted-foreground hover:text-foreground",
               )}

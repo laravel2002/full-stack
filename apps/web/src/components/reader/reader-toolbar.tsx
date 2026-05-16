@@ -20,7 +20,7 @@ import { Chapter } from '@/lib/reader/mock-novel';
 interface ReaderToolbarProps {
   title: string;
   novelSlug: string;
-  chapters: Chapter[];
+  chapters: Pick<Chapter, 'id' | 'chapterNumber' | 'title'>[];
   currentChapterNumber: number;
 }
 
