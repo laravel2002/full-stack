@@ -56,7 +56,7 @@ Nếu bạn muốn tự tay cấu hình từng bước trên giao diện của R
    - **Name**: `novel-platform-api`
    - **Root Directory**: `services/api`
    - **Runtime**: `Node`
-   - **Build Command**: `npm install && npx prisma generate && npx prisma db push && npm run build`
+   - **Build Command**: `npm install --include=dev && npx prisma generate && npx prisma db push && npm run build`
    - **Start Command**: `npm run start:prod`
 5. Nhập các biến môi trường (**Environment Variables**) tương tự như ở Cách 1:
    - `DATABASE_URL`
