@@ -3,8 +3,6 @@
 import { useLibraryStore } from "@/stores/library-store";
 import { getStories } from "@/lib/api";
 import {
-  Book,
-  ChevronLeft,
   Search,
   BookOpen,
   Heart,
@@ -174,28 +172,6 @@ export default function LibraryPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300 pb-20 font-[family-name:var(--font-geist-sans)]">
-      {/* Header tối giản cổ phong */}
-      <header className="sticky top-0 z-40 w-full border-b border-zen-muted bg-background/80 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              className="text-zen-gray hover:text-zen-ink transition-colors flex items-center gap-1 text-sm font-sans"
-            >
-              <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
-              <span>Trang chủ</span>
-            </Link>
-          </div>
-
-          <div className="flex items-center gap-2 font-serif font-bold text-lg text-zen-ink">
-            <Book className="w-5 h-5 text-zen-cinnabar stroke-[1.5]" />
-            Mặc Quán Thư Các
-          </div>
-
-          <div className="w-20"></div> {/* Giữ cân đối layout */}
-        </div>
-      </header>
-
       <main className="max-w-6xl mx-auto px-4 py-8 sm:py-12">
         {/* Lời đề từ cổ phong đầu trang */}
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">

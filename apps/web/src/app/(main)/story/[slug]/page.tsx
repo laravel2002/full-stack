@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { Navbar } from '@/components/layout/navbar';
-import { Footer } from '@/components/layout/footer';
 import { User, Eye, BookOpen, Layers } from 'lucide-react';
 import { fetchApi } from '@/lib/api';
 
@@ -164,8 +162,6 @@ export default async function StoryPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-zen-paper selection:bg-zen-cinnabar selection:text-zen-paper">
-      <Navbar />
-
       <main className="flex-1 py-12 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
@@ -255,8 +251,6 @@ export default async function StoryPage({ params }: PageProps) {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import { Noto_Serif, Inter } from 'next/font/google';
-import { Navbar } from '@/components/layout/navbar';
-import { Footer } from '@/components/layout/footer';
 import './globals.css';
 
 // Nhúng font Noto Serif cho tiêu đề tác phẩm và logo mang phong vị cổ điển Á Đông
@@ -54,9 +52,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300 font-sans">
         <div className="flex-1 flex flex-col relative z-10 selection:bg-zen-cinnabar selection:text-zen-paper">
-          <Navbar />
           {children}
-          <Footer />
         </div>
       </body>
     </html>
