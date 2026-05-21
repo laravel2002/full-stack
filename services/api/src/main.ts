@@ -10,8 +10,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // CORS: Cho phép các nguồn gốc cục bộ hoặc các nguồn gốc chỉ định truy cập
+ // CORS: Cho phép Frontend (Vercel) hoặc Localhost truy cập
+  const frontendUrl = process.env.FRONTEND_URL || '*'; // Mặc định mở '*' nếu chưa cấu hình trên Render
+
   app.enableCors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: frontendUrl === '*' ? '*' : [frontendUrl, 'http://localhost:3000', 'http://localhost:3001'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
