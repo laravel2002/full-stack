@@ -2,13 +2,13 @@
 
 import { useLibraryStore } from "@/stores/library-store";
 import { getStories } from "@/lib/api";
-import { 
-  Book, 
-  ChevronLeft, 
-  Search, 
-  BookOpen, 
-  Heart, 
-  Clock, 
+import {
+  Book,
+  ChevronLeft,
+  Search,
+  BookOpen,
+  Heart,
+  Clock,
   BookMarked,
   Sparkles,
   ArrowRight
@@ -42,7 +42,7 @@ function getStoryCategory(slug: string, title: string): string {
   if (slug === "dong-chu-liet-quoc") return "Lịch Sử";
   if (slug === "nam-hoa-kinh") return "Thiền Tông";
   if (slug === "kinh-thi") return "Thi Ca";
-  
+
   let hash = 0;
   for (let i = 0; i < title.length; i++) {
     hash = title.charCodeAt(i) + ((hash << 5) - hash);
@@ -54,22 +54,22 @@ function getStoryCategory(slug: string, title: string): string {
 export default function LibraryPage() {
   const { savedNovels, readingHistory, getContinueReading } = useLibraryStore();
   const [mounted, setMounted] = useState(false);
-  
+
   // Quản lý danh sách truyện từ API
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Bộ lọc và Tìm kiếm
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Tất Cả");
   const [activeTab, setActiveTab] = useState<"explore" | "saved">("explore");
-  
+
   // Dùng useTransition để tối ưu hóa việc chuyển đổi bộ lọc mượt mà
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     setMounted(true);
-    
+
     // Nạp dữ liệu truyện từ API backend thực tế hoặc dữ liệu dự phòng
     const loadStories = async () => {
       try {
@@ -82,7 +82,7 @@ export default function LibraryPage() {
         setLoading(false);
       }
     };
-    
+
     loadStories();
   }, []);
 
@@ -97,10 +97,10 @@ export default function LibraryPage() {
           const foundChapter = foundStory.chapters?.find(
             c => c.chapterNum === continueRead.chapterNumber
           ) || { id: "c1", chapterNum: continueRead.chapterNumber, title: `Chương ${continueRead.chapterNumber}` };
-          
+
           const progress = restoreReadingProgress(foundChapter.id);
           const percentage = progress ? progress.percentage : 0;
-          
+
           setLastReadProgress({
             story: foundStory,
             chapter: foundChapter,
@@ -124,7 +124,7 @@ export default function LibraryPage() {
           chapterNum: entry.chapterNumber,
           title: `Chương ${entry.chapterNumber}`
         };
-        
+
         const date = new Date(entry.updatedAt);
         const timeString = date.toLocaleDateString("vi-VN", {
           month: "short",
@@ -132,14 +132,14 @@ export default function LibraryPage() {
           hour: "2-digit",
           minute: "2-digit"
         });
-        
+
         return {
           story,
           chapter,
           timeString
         };
       }).filter(item => item !== null);
-      
+
       setResolvedHistory(resolved);
     }
   }, [mounted, stories, readingHistory]);
@@ -158,17 +158,17 @@ export default function LibraryPage() {
   // Logic lọc và tìm kiếm truyện
   const filteredStories = stories.filter(story => {
     // 1. Tìm theo từ khóa (tiêu đề hoặc tác giả)
-    const matchesSearch = 
+    const matchesSearch =
       story.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       story.author.toLowerCase().includes(searchQuery.toLowerCase());
-      
+
     // 2. Lọc theo thể loại
     const storyCat = getStoryCategory(story.slug, story.title);
     const matchesCategory = selectedCategory === "Tất Cả" || storyCat === selectedCategory;
-    
+
     // 3. Lọc theo Tab (Khám phá hoặc Đã lưu)
     const matchesTab = activeTab === "explore" || savedNovels.includes(story.slug);
-    
+
     return matchesSearch && matchesCategory && matchesTab;
   });
 
@@ -178,7 +178,7 @@ export default function LibraryPage() {
       <header className="sticky top-0 z-40 w-full border-b border-zen-muted bg-background/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link 
+            <Link
               href="/"
               className="text-zen-gray hover:text-zen-ink transition-colors flex items-center gap-1 text-sm font-sans"
             >
@@ -186,12 +186,12 @@ export default function LibraryPage() {
               <span>Trang chủ</span>
             </Link>
           </div>
-          
+
           <div className="flex items-center gap-2 font-serif font-bold text-lg text-zen-ink">
             <Book className="w-5 h-5 text-zen-cinnabar stroke-[1.5]" />
             Mặc Quán Thư Các
           </div>
-          
+
           <div className="w-20"></div> {/* Giữ cân đối layout */}
         </div>
       </header>
@@ -215,16 +215,16 @@ export default function LibraryPage() {
               <div className="flex gap-4 items-center">
                 <div className="w-14 h-20 bg-muted rounded-md overflow-hidden border border-zen-muted shrink-0 hidden sm:block shadow-xs">
                   {lastReadProgress.story.coverUrl ? (
-                    <img 
-                      src={lastReadProgress.story.coverUrl} 
-                      alt={lastReadProgress.story.title} 
+                    <img
+                      src={lastReadProgress.story.coverUrl}
+                      alt={lastReadProgress.story.title}
                       className="w-full h-full object-cover"
                     />
                   ) : (
                     <div className="w-full h-full bg-zen-muted flex items-center justify-center text-[10px] text-zen-gray font-serif">Bìa sách</div>
                   )}
                 </div>
-                
+
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] bg-zen-cinnabar/10 text-zen-cinnabar px-2 py-0.5 rounded-full font-sans font-medium uppercase tracking-wider">
@@ -241,11 +241,11 @@ export default function LibraryPage() {
                     <BookOpen className="w-3.5 h-3.5 opacity-70" />
                     {lastReadProgress.chapter.title}
                   </p>
-                  
+
                   {lastReadProgress.percentage > 0 && (
                     <div className="flex items-center gap-3 pt-2">
                       <div className="w-36 sm:w-48 h-1 bg-zen-muted/60 rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-zen-cinnabar transition-all duration-300"
                           style={{ width: `${lastReadProgress.percentage}%` }}
                         />
@@ -272,32 +272,30 @@ export default function LibraryPage() {
 
         {/* Layout Hai Cột: Cột chính tìm kiếm/lọc và danh sách, Cột phụ lịch sử và thông số */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 items-start">
-          
+
           {/* CỘT CHÍNH: KHÁM PHÁ & BỘ LỌC */}
           <div className="space-y-8">
-            
+
             {/* Thanh Tab chính & Tìm kiếm */}
             <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-zen-muted pb-4">
               {/* Tab Chuyển Đổi Khám Phá / Đã Lưu */}
               <div className="flex bg-zen-muted/40 p-1 rounded-lg border border-zen-muted/60">
                 <button
                   onClick={() => startTransition(() => setActiveTab("explore"))}
-                  className={`flex items-center gap-1.5 px-4 py-1.5 text-sm rounded-md transition-all font-sans font-medium ${
-                    activeTab === "explore"
+                  className={`flex items-center gap-1.5 px-4 py-1.5 text-sm rounded-md transition-all font-sans font-medium ${activeTab === "explore"
                       ? "bg-white dark:bg-zen-ink text-zen-ink shadow-xs"
                       : "text-zen-gray hover:text-zen-ink"
-                  }`}
+                    }`}
                 >
                   <Sparkles className="w-4 h-4 stroke-[1.5]" />
                   Khám Phá Thư Các
                 </button>
                 <button
                   onClick={() => startTransition(() => setActiveTab("saved"))}
-                  className={`flex items-center gap-1.5 px-4 py-1.5 text-sm rounded-md transition-all font-sans font-medium ${
-                    activeTab === "saved"
+                  className={`flex items-center gap-1.5 px-4 py-1.5 text-sm rounded-md transition-all font-sans font-medium ${activeTab === "saved"
                       ? "bg-white dark:bg-zen-ink text-zen-ink shadow-xs"
                       : "text-zen-gray hover:text-zen-ink"
-                  }`}
+                    }`}
                 >
                   <Heart className="w-4 h-4 stroke-[1.5]" />
                   Kệ Sách Đã Lưu ({savedNovels.length})
@@ -323,11 +321,10 @@ export default function LibraryPage() {
                 <button
                   key={cat}
                   onClick={() => startTransition(() => setSelectedCategory(cat))}
-                  className={`px-4 py-1.5 rounded-full text-xs font-sans font-medium whitespace-nowrap transition-all border ${
-                    selectedCategory === cat
+                  className={`px-4 py-1.5 rounded-full text-xs font-sans font-medium whitespace-nowrap transition-all border ${selectedCategory === cat
                       ? "bg-zen-cinnabar/10 text-zen-cinnabar border-zen-cinnabar/30"
                       : "bg-white/20 border-zen-muted hover:border-zen-gray/40 text-zen-gray hover:text-zen-ink"
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -354,7 +351,7 @@ export default function LibraryPage() {
                   Không tìm thấy tác phẩm
                 </h3>
                 <p className="text-sm text-zen-gray font-sans max-w-sm mx-auto">
-                  {searchQuery || selectedCategory !== "Tất Cả" 
+                  {searchQuery || selectedCategory !== "Tất Cả"
                     ? "Hãy thử đổi từ khóa tìm kiếm hoặc chọn bộ lọc thể loại khác."
                     : activeTab === "saved"
                       ? "Kệ sách hiện chưa có tác phẩm nào. Hãy tìm kiếm truyện và lưu vào thư viện cá nhân."
@@ -367,17 +364,17 @@ export default function LibraryPage() {
                 {filteredStories.map((story) => {
                   const category = getStoryCategory(story.slug, story.title);
                   const isSaved = savedNovels.includes(story.slug);
-                  
+
                   return (
                     <div key={story.slug} className="group relative flex flex-col">
                       {/* Bìa truyện thiết kế tinh xảo */}
-                      <Link 
+                      <Link
                         href={`/story/${story.slug}`}
                         className="aspect-[2/3] bg-muted rounded-xl overflow-hidden border border-zen-muted/60 mb-4 block shadow-xs group-hover:border-zen-cinnabar/30 group-hover:shadow-md transition-all duration-300 bg-white/40 relative"
                       >
                         {story.coverUrl ? (
-                          <img 
-                            src={story.coverUrl} 
+                          <img
+                            src={story.coverUrl}
                             alt={story.title}
                             className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                           />
@@ -386,12 +383,12 @@ export default function LibraryPage() {
                             Bìa tác phẩm Mặc Quán
                           </div>
                         )}
-                        
+
                         {/* Huy hiệu nhỏ hiển thị thể loại chìm */}
                         <div className="absolute top-2 left-2 bg-background/90 text-zen-ink border border-zen-muted px-2 py-0.5 rounded-md text-[9px] font-sans font-medium uppercase tracking-wider backdrop-blur-xs opacity-90">
                           {category}
                         </div>
-                        
+
                         {/* Icon tim đỏ nếu đã lưu truyện */}
                         {isSaved && (
                           <div className="absolute top-2 right-2 bg-white/95 text-zen-cinnabar p-1.5 rounded-full shadow-xs backdrop-blur-xs">
@@ -402,7 +399,7 @@ export default function LibraryPage() {
 
                       {/* Thông tin truyện */}
                       <div className="space-y-1">
-                        <Link 
+                        <Link
                           href={`/story/${story.slug}`}
                           className="font-serif font-bold text-base text-zen-ink group-hover:text-zen-cinnabar transition-colors duration-200 line-clamp-1"
                         >
@@ -429,14 +426,14 @@ export default function LibraryPage() {
 
           {/* CỘT PHỤ (SIDEBAR): LỊCH SỬ ĐỌC & TRUYỆN ĐÃ LƯU NHANH */}
           <aside className="space-y-8 lg:border-l lg:border-zen-muted lg:pl-8">
-            
+
             {/* Lịch sử đọc gần đây */}
             <div className="space-y-4">
               <h3 className="text-lg font-serif font-bold flex items-center gap-2 text-zen-ink">
                 <Clock className="w-4.5 h-4.5 text-zen-cinnabar stroke-[1.5]" />
                 Lịch Sử Đọc Gần Đây
               </h3>
-              
+
               {resolvedHistory.length === 0 ? (
                 <div className="text-center py-8 border border-dashed border-zen-muted rounded-xl bg-white/10">
                   <Clock className="w-8 h-8 text-zen-gray mx-auto mb-2 opacity-35 stroke-[1.2]" />
@@ -485,7 +482,7 @@ export default function LibraryPage() {
                 </div>
               </div>
             </div>
-            
+
           </aside>
 
         </div>
