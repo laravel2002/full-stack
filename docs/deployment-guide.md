@@ -90,8 +90,8 @@ Khi Frontend Next.js gọi API đến Backend NestJS, trình duyệt sẽ kiểm
 
 1. Truy cập vào **Render Dashboard**, chọn Web Service **novel-platform-api** của bạn.
 2. Điều hướng đến mục **Environment**.
-3. Cập nhật biến môi trường `FRONTEND_URL` từ giá trị mặc định (`*` hoặc nháp) thành URL Frontend chính thức của Vercel (ví dụ: `https://novel-platform-web.vercel.app`).
-4. Lưu thay đổi. Render sẽ tự động kích hoạt tiến trình Deploy lại (Redeploy) để áp dụng CORS mới.
+3. Cập nhật biến môi trường `FRONTEND_URL` từ giá trị mặc định (`*` hoặc nháp) thành URL Frontend chính thức của Vercel. **Đặc biệt, hệ thống hỗ trợ khai báo nhiều tên miền ngăn cách bởi dấu phẩy** (ví dụ: `https://macquan.vercel.app,https://novel.id.vn` để vừa hỗ trợ domain mặc định Vercel vừa hỗ trợ tên miền riêng của bạn).
+4. Lưu thay đổi. Render sẽ tự động kích hoạt tiến trình Deploy lại (Redeploy) để áp dụng cấu hình CORS mới.
 
 ---
 
