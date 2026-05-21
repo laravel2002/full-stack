@@ -9,12 +9,18 @@ import compression from 'compression';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // CORS: Cho phép các nguồn gốc cục bộ hoặc các nguồn gốc chỉ định truy cập
- // CORS: Cho phép Frontend (Vercel) hoặc Localhost truy cập
+  // CORS: Cho phép Frontend (Vercel) hoặc Localhost truy cập, hỗ trợ đa tên miền ngăn cách bằng dấu phẩy
   const frontendUrl = process.env.FRONTEND_URL || '*'; // Mặc định mở '*' nếu chưa cấu hình trên Render
+  const origins = frontendUrl === '*'
+    ? '*'
+    : [
+        ...frontendUrl.split(',').map(url => url.trim()),
+        'http://localhost:3000',
+        'http://localhost:3001'
+      ];
 
   app.enableCors({
-    origin: frontendUrl === '*' ? '*' : [frontendUrl, 'http://localhost:3000', 'http://localhost:3001'],
+    origin: origins,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
