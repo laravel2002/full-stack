@@ -1,37 +1,38 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
-model Novel {
+model Story {
   id          String    @id @default(cuid())
-  slug        String    @unique
   title       String
+  slug        String    @unique
+  author      String
   description String?
-  coverImage  String?
-  chapters    Chapter[]
+  coverUrl    String?
+  viewCount   Int       @default(0)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  chapters    Chapter[]
+
+  @@index([viewCount(sort: Desc)])
 }
 
 model Chapter {
-  id            String   @id @default(cuid())
-  novelId       String
-  chapterNumber Int
-  title         String
-  content       String   // Stored as JSON string
-  novel         Novel    @relation(fields: [novelId], references: [id], onDelete: Cascade)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id          String   @id @default(cuid())
+  storyId     String
+  chapterNum  Int
+  title       String
+  storagePath String   // URL to Cloudflare R2
+  createdAt   DateTime @default(now())
+  story       Story    @relation(fields: [storyId], references: [id], onDelete: Cascade)
 
-  @@unique([novelId, chapterNumber])
+  @@unique([storyId, chapterNum])
+  @@index([createdAt(sort: Desc)])
 }

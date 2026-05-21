@@ -17,7 +17,6 @@ export async function fetchApi<T>(endpoint: string, options?: RequestInit): Prom
 
     return await response.json();
   } catch (error) {
-    console.error(`Failed to fetch from ${url}:`, error);
     throw error;
   }
 }

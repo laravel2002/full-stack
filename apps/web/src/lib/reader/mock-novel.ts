@@ -61,7 +61,7 @@ const mockChapters: Record<number, Chapter> = {
 
 export async function getNovel(slug: string): Promise<Novel> {
   try {
-    const apiNovel = await fetchApi<any>(`/novels/${slug}`);
+    const apiNovel = await fetchApi<any>(`/stories/${slug}`);
     return {
       id: apiNovel.id,
       slug: apiNovel.slug,
@@ -81,7 +81,7 @@ export async function getNovel(slug: string): Promise<Novel> {
 
 export async function getChapter(slug: string, chapterNumber: number): Promise<Chapter> {
   try {
-    const apiChapter = await fetchApi<any>(`/novels/${slug}/chapters/${chapterNumber}`);
+    const apiChapter = await fetchApi<any>(`/chapters/${slug}/${chapterNumber}`);
     return {
       id: apiChapter.id,
       chapterNumber: apiChapter.chapterNumber,
@@ -101,7 +101,7 @@ export async function getChapter(slug: string, chapterNumber: number): Promise<C
 
 export async function getAllNovels(): Promise<Novel[]> {
   try {
-    const apiNovels = await fetchApi<any[]>('/novels');
+    const apiNovels = await fetchApi<any[]>('/stories/featured'); // Just fetching some stories for mock
     return apiNovels.map(n => ({
       id: n.id,
       slug: n.slug,
