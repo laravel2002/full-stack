@@ -57,7 +57,7 @@ Nếu bạn muốn tự tay cấu hình từng bước trên giao diện của R
    - **Root Directory**: `services/api`
    - **Runtime**: `Node`
    - **Build Command**: `npm install --include=dev && npx prisma generate && npx prisma db push && npm run build`
-   - **Start Command**: `npm run start:prod`
+   - **Start Command**: `node dist/src/main.js`
 5. Nhập các biến môi trường (**Environment Variables**) tương tự như ở Cách 1:
    - `DATABASE_URL`
    - `PORT`: `10000` (hoặc để trống, Render tự động cấu hình)
