@@ -42,7 +42,7 @@ Render hỗ trợ tính năng **Blueprints** cho phép bạn tự động hóa v
 6. Nhấn **Apply** để Render tự động tạo và triển khai dịch vụ Web Service.
 
 > [!TIP]
-> Hệ thống đã được cấu hình tự động chạy `releaseCommand: npx prisma db push`. Điều này giúp tự động cập nhật và đồng bộ cấu trúc cơ sở dữ liệu lên Neon PostgreSQL mỗi khi bạn có bản cập nhật mã nguồn mới mà không cần thao tác thủ công.
+> Hệ thống đã được cấu hình tự động chạy `npx prisma db push` ngay trong tiến trình Build. Điều này giúp tự động cập nhật và đồng bộ cấu trúc cơ sở dữ liệu lên Neon PostgreSQL mỗi khi bạn có bản cập nhật mã nguồn mới mà không cần thao tác thủ công.
 
 ---
 
@@ -56,10 +56,8 @@ Nếu bạn muốn tự tay cấu hình từng bước trên giao diện của R
    - **Name**: `novel-platform-api`
    - **Root Directory**: `services/api`
    - **Runtime**: `Node`
-   - **Build Command**: `npm install && npx prisma generate && npm run build`
+   - **Build Command**: `npm install && npx prisma generate && npx prisma db push && npm run build`
    - **Start Command**: `npm run start:prod`
-4. Click vào phần **Advanced** để cấu hình thêm:
-   - **Release Command**: `npx prisma db push`
 5. Nhập các biến môi trường (**Environment Variables**) tương tự như ở Cách 1:
    - `DATABASE_URL`
    - `PORT`: `10000` (hoặc để trống, Render tự động cấu hình)
