@@ -80,7 +80,69 @@
   --radius: 0.375rem;
 }
 
+.dark {
+  --background: #141512;
+  --foreground: #d1cdb8;
+  --card: #1c1d1a;
+  --card-foreground: #d1cdb8;
+  --popover: #141512;
+  --popover-foreground: #d1cdb8;
+  --primary: #b6191a;
+  --primary-foreground: #141512;
+  --secondary: #2c2d2a;
+  --secondary-foreground: #d1cdb8;
+  --muted: #2c2d2a;
+  --muted-foreground: #7a7a7a;
+  --accent: #2c2d2a;
+  --accent-foreground: #b6191a;
+  --border: #2c2d2a;
+  --input: #2c2d2a;
+}
 
+.sepia {
+  --background: #f4edd8;
+  --foreground: #433422;
+  --card: #ebdcb9;
+  --card-foreground: #433422;
+  --popover: #f4edd8;
+  --popover-foreground: #433422;
+  --primary: #b6191a;
+  --primary-foreground: #f4edd8;
+  --secondary: #dfcfab;
+  --secondary-foreground: #433422;
+  --muted: #dfcfab;
+  --muted-foreground: #8a7a65;
+  --accent: #dfcfab;
+  --accent-foreground: #b6191a;
+  --border: #dfcfab;
+  --input: #dfcfab;
+}
+
+.xuyenchi {
+  --background: #efe8d4;
+  --foreground: #2d261e;
+  --card: #e5dcc5;
+  --card-foreground: #2d261e;
+  --popover: #efe8d4;
+  --popover-foreground: #2d261e;
+  --primary: #b6191a;
+  --primary-foreground: #efe8d4;
+  --secondary: #dcd2b7;
+  --secondary-foreground: #2d261e;
+  --muted: #dcd2b7;
+  --muted-foreground: #7c7263;
+  --accent: #dcd2b7;
+  --accent-foreground: #b6191a;
+  --border: #dcd2b7;
+  --input: #dcd2b7;
+
+  /* Giả lập vân giấy xuyến chỉ mộc mạc tinh tế */
+  background-image: 
+    radial-gradient(rgba(45, 38, 30, 0.015) 1px, transparent 0),
+    radial-gradient(rgba(45, 38, 30, 0.010) 1px, transparent 0);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
 
 @layer base {
   * {

@@ -1,11 +1,28 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { StoryService } from './story.service';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
 
 @ApiTags('Stories')
 @Controller('stories')
 export class StoryController {
   constructor(private readonly storyService: StoryService) {}
+
+  @Get()
+  @ApiOperation({ summary: 'Lấy danh sách hoặc tìm kiếm tác phẩm' })
+  @ApiQuery({
+    name: 'q',
+    required: false,
+    description: 'Từ khóa tìm kiếm theo tiêu đề hoặc tác giả',
+    example: 'Đạo Đức Kinh',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Trả về danh sách truyện khớp với từ khóa tìm kiếm (nếu có).',
+  })
+  async findAll(@Query('q') q?: string) {
+    return this.storyService.findAll(q);
+  }
+
 
   @Get('featured')
   @ApiOperation({ summary: 'Lấy tác phẩm truyện nổi bật nhất (Featured Story)' })

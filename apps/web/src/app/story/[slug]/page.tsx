@@ -1,10 +1,11 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { User, Eye, BookOpen, Layers } from 'lucide-react';
-import { fetchApi } from '@/lib/api-client';
+import { fetchApi } from '@/lib/api';
 
 // Dữ liệu mock tĩnh khớp chuẩn với CSDL Neon PostgreSQL
 const storiesData: Record<string, {
@@ -118,6 +119,39 @@ interface PageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+// Bật Metadata động chuẩn SEO và Open Graph
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const story = await getStory(resolvedParams.slug);
+
+  if (!story) {
+    return {
+      title: 'Không tìm thấy tác phẩm | Mặc Quán',
+      description: 'Tác phẩm yêu cầu không tồn tại trong hệ thống thư viện Mặc Quán.',
+    };
+  }
+
+  const desc = story.description || 'Tác phẩm truyện chữ tinh tế tại Mặc Quán.';
+  return {
+    title: `${story.title} - Tác giả ${story.author} | Mặc Quán`,
+    description: desc.slice(0, 160) + (desc.length > 160 ? '...' : ''),
+    openGraph: {
+      title: `${story.title} - Mặc Quán`,
+      description: desc,
+      type: 'article',
+      url: `https://macquan.vn/story/${resolvedParams.slug}`,
+      images: [
+        {
+          url: story.coverUrl,
+          width: 600,
+          height: 800,
+          alt: `Ảnh bìa tác phẩm ${story.title}`,
+        },
+      ],
+    },
+  };
 }
 
 export default async function StoryPage({ params }: PageProps) {

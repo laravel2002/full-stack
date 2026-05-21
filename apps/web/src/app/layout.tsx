@@ -24,6 +24,22 @@ export const metadata: Metadata = {
   title: 'Mặc Quán - Thư Quán Đọc Truyện Kiếm Hiệp & Thiền Học Cổ Điển',
   description: 'Nền tảng đọc truyện chữ tinh tế mang triết lý tối giản thiền tông Đông Phương. Tận hưởng không gian đọc tinh khiết, êm dịu cho tâm hồn.',
   keywords: 'mặc quán, đọc truyện, kiếm hiệp, lịch sử, cổ trang, thiền học, tối giản, web novel',
+  openGraph: {
+    title: 'Mặc Quán - Thư Quán Đọc Truyện Kiếm Hiệp & Thiền Học Cổ Điển',
+    description: 'Nền tảng đọc truyện chữ tinh tế mang triết lý tối giản thiền tông Đông Phương. Tận hưởng không gian đọc tinh khiết, êm dịu cho tâm hồn.',
+    siteName: 'Mặc Quán',
+    locale: 'vi_VN',
+    type: 'website',
+    url: 'https://macquan.vn',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop',
+        width: 1200,
+        height: 630,
+        alt: 'Mặc Quán - Thư Quán Đọc Truyện Kiếm Hiệp & Thiền Học Cổ Điển',
+      }
+    ]
+  }
 };
 
 export default function RootLayout({

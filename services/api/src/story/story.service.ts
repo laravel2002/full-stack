@@ -49,4 +49,27 @@ export class StoryService {
 
     return story;
   }
+
+  // 4. GET /stories: Danh sách truyện hoặc tìm kiếm truyện theo tên hoặc tác giả (không phân biệt hoa thường)
+  async findAll(q?: string) {
+    const whereClause = q
+      ? {
+          OR: [
+            { title: { contains: q, mode: 'insensitive' as const } },
+            { author: { contains: q, mode: 'insensitive' as const } },
+          ],
+        }
+      : {};
+
+    return this.prisma.story.findMany({
+      where: whereClause,
+      include: {
+        chapters: {
+          orderBy: { chapterNum: 'asc' },
+        },
+      },
+      orderBy: { viewCount: 'desc' },
+    });
+  }
 }
+

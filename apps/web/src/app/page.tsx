@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BookOpen, User, Flame, Clock } from 'lucide-react';
 import { getFeaturedStory, getLeaderboard, getRecentChapters } from '@/lib/api';
+import { ReadingHistoryHome } from '@/components/layout/reading-history-home';
 
 // Lấy dữ liệu được đưa vào lib/api.ts
 export default async function Home() {
@@ -34,6 +35,9 @@ export default async function Home() {
                     Mặc Quán khai mở không gian tinh khiết, tĩnh lặng giúp hành giả thưởng lãm võ hiệp hào tình và triết học sâu xa trong tâm thế thư thái nhất.
                   </p>
                 </div>
+
+                {/* Tích hợp Lịch sử đọc dở */}
+                <ReadingHistoryHome />
 
                 {/* Card truyện Featured */}
                 <div className="rounded-xl border border-zen-muted/50 bg-white/40 p-6 backdrop-blur-sm shadow-sm hover:border-zen-cinnabar/30 transition-all duration-300">

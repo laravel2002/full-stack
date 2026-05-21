@@ -19,42 +19,41 @@ export interface Novel {
 }
 
 export const mockNovel: Novel = {
-  id: 'nov_1',
-  slug: 'the-awakening',
-  title: 'The Awakening',
-  author: 'Elena Vance',
-  coverUrl: 'https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=1000&auto=format&fit=crop',
-  description: 'A journey into the unknown depths of a forgotten world.',
+  id: 'nov_thien_long',
+  slug: 'thien-long-bat-bo',
+  title: 'Thiên Long Bát Bộ',
+  author: 'Kim Dung',
+  coverUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop',
+  description: 'Một kiệt tác kiếm hiệp võ học đỉnh cao của nhà văn Kim Dung, lồng ghép sâu sắc các triết lý nhân quả của Phật giáo và võ hiệp cổ trang. Câu chuyện xoay quanh vận mệnh đầy thăng trầm của Kiều Phong, Đoàn Dự và Hư Trúc giữa vòng xoáy ân oán giang hồ và chiến tranh quốc gia.',
   totalChapters: 2,
   chapters: [
-    { id: 'ch_1', chapterNumber: 1, title: 'Chapter 1: The Call' },
-    { id: 'ch_2', chapterNumber: 2, title: 'Chapter 2: Departure' },
+    { id: 'ch_thien_long_1', chapterNumber: 1, title: 'Chương 1: Khởi đầu hồng trần, kiếm khí phong vân' },
+    { id: 'ch_thien_long_2', chapterNumber: 2, title: 'Chương 2: Nhạn Môn quan ngoại, huyết lệ giang hồ' },
   ],
 };
 
 const mockChapters: Record<number, Chapter> = {
   1: {
-    id: 'ch_1',
+    id: 'ch_thien_long_1',
     chapterNumber: 1,
-    title: 'Chapter 1: The Call',
+    title: 'Chương 1: Khởi đầu hồng trần, kiếm khí phong vân',
     content: [
-      "The wind howled through the ancient trees, their bare branches scratching against the windowpane like desperate fingers. In the dimly lit room, Elara sat huddled over the dusty tome, her eyes scanning the faded ink.",
-      "She had been searching for this book for years, a relic from a forgotten age, said to hold the key to the lost city of Aethelgard. Her heart pounded against her ribs as she finally deciphered the final passage.",
-      "The journey would be perilous, filled with unknown dangers and mythical beasts. But the promise of uncovering the truth, of proving her grandfather's theories, was a fire that burned brighter than any fear.",
-      "With a resolute sigh, she closed the book. Tomorrow, at first light, she would leave the safety of her village. The Awakening had begun.",
-      "Far away, in the heart of the shadowed mountains, a pair of crimson eyes snapped open. The seal was weakening. The time of waiting was drawing to a close."
+      "Màn sương lạnh phủ kín đỉnh Nhạn Môn quan, gió bấc gào rít qua khe đá nhọn như tiếng gươm đao khua động. Giữa khung cảnh tiêu điều ấy, một bóng người độc hành cưỡi ngựa từ phía xa đi tới. Y mặc áo vải thô, vai đeo một bầu rượu cũ, dung mạo phong trần nhưng đôi mắt sáng quắc như sao đêm, toát lên khí phách ngút ngàn của bậc hào kiệt giang hồ.",
+      "Đó chính là Kiều Phong, bang chủ Cái Bang uy chấn thiên hạ. Y vừa nhận được mật báo về sự xuất hiện của Khế Đan kỵ binh vùng biên ải. Hồng trần cuồn cuộn, ân oán giang hồ và đại nghĩa quốc gia, tất cả như những quân cờ vô hình đang bủa vây lấy số phận của y.",
+      "Tiếng đàn tranh vọng lại từ quán nước bên đường cắt ngang dòng suy nghĩ của Kiều Phong. Tiếng đàn lúc trầm lúc bổng, khi thì nhẹ nhàng như nước chảy qua cầu, khi thì dồn dập như bão táp mưa sa. Kiều Phong mỉm cười khẽ gật đầu, y biết mình sắp gặp một vị cố nhân hữu duyên.",
+      "Trong giang hồ, ai cũng biết câu nói: 'Bắc Kiều Phong, Nam Mộ Dung'. Nhưng ít ai thấu hiểu được nỗi cô đơn tột cùng của kẻ đứng trên đỉnh cao võ học. Mỗi bước đi là một vết chân hằn sâu vào cát bụi thời gian, mỗi đường kiếm vạch ra là một lần ranh giới sinh tử cận kề.",
+      "Kiều Phong ghìm cương ngựa, ngửa cổ uống một ngụm rượu nồng, ánh mắt hướng về phía chân trời xa xăm, nơi mây đen đang cuồn cuộn kéo tới báo hiệu một trận cuồng phong huyết lệ sắp bắt đầu."
     ]
   },
   2: {
-    id: 'ch_2',
+    id: 'ch_thien_long_2',
     chapterNumber: 2,
-    title: 'Chapter 2: Departure',
+    title: 'Chương 2: Nhạn Môn quan ngoại, huyết lệ giang hồ',
     content: [
-      "Dawn broke with a cold, grey light, painting the sky in shades of slate and pearl. Elara stood at the edge of the village, her breath pluming in the crisp air. Her pack was heavy, laden with provisions and the ancient tome.",
-      "She cast one last look at the cluster of thatched-roof cottages, her home for as long as she could remember. A pang of melancholy tightened her chest, but she pushed it aside. Her path lay forward.",
-      "The Whispering Woods loomed ahead, a dense tangle of ancient trees that seemed to drink the morning light. The villagers spoke of the woods in hushed tones, trading tales of spirits and shape-shifters.",
-      "Elara tightened the straps of her pack and took her first step onto the moss-covered path. The forest swallowed her whole, the air growing thick with the scent of damp earth and decaying leaves.",
-      "She hadn't gone far when she heard the first snap of a twig. It was faint, but unmistakable. Something was following her."
+      "Tiếng vó ngựa dồn dập phá tan sự yên lặng của thung lũng sương mù. Dưới chân đèo Nhạn Môn quan, từng luồng sát khí ngút trời đang tụ hội. Những chiếc áo bào thêu hoa văn kỳ lạ của các cao thủ võ lâm đại diện cho các thế lực lớn đang tập kết để đón đầu một mối hiểm họa truyền thuyết.",
+      "Kiều Phong đứng trên mỏm đá cao, tà áo thô bay phần phật trong gió lớn. Y thầm kinh ngạc khi chứng kiến sự hiện diện của những danh môn chánh phái vốn ít khi can thiệp vào biên ải. Điều gì đã khiến lòng người xao động đến thế?",
+      "Một bức thư mật viết trên giấy da dê đã ngả màu vàng úa, nét chữ vội vã nhưng ẩn chứa bí mật có thể làm đảo lộn cả võ lâm Trung Nguyên. Đó là câu chuyện về một đứa trẻ sơ sinh Khế Đan và một thảm án đẫm máu ba mươi năm trước.",
+      "Đúng lúc ấy, tiếng tù và từ phía biên thùy Khế Đan vang lên trầm hùng, kéo theo bụi cát mù trời. Những trận chiến ân oán hồng trần sắp sửa cuốn tất cả vào vòng xoáy không lối thoát. Liệu Kiều Phong có giữ vững được tâm cảnh thanh tịnh tựa mặt hồ mùa thu trước cơn bão lớn này?"
     ]
   }
 };
@@ -66,86 +65,125 @@ export async function getNovel(slug: string): Promise<Novel> {
       id: apiNovel.id,
       slug: apiNovel.slug,
       title: apiNovel.title,
-      author: 'Unknown Author', 
-      coverUrl: apiNovel.coverImage || mockNovel.coverUrl,
+      author: apiNovel.author || 'Kim Dung', 
+      coverUrl: apiNovel.coverUrl || mockNovel.coverUrl,
       description: apiNovel.description || '',
       totalChapters: apiNovel.chapters?.length || 0,
-      chapters: apiNovel.chapters || [],
+      chapters: (apiNovel.chapters || []).map((ch: any) => ({
+        id: ch.id,
+        chapterNumber: ch.chapterNum,
+        title: ch.title,
+      })),
     };
   } catch (err) {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(mockNovel), 500);
-    });
+    console.warn(`[Mặc Quán] Không thể gọi API câu chuyện cho slug ${slug}, sử dụng fallback.`, err);
+    if (slug === 'thien-long-bat-bo') {
+      return mockNovel;
+    }
+    // Trả về mock novel với slug tương ứng
+    return {
+      ...mockNovel,
+      slug,
+      title: slug === 'dao-duc-kinh' ? 'Đạo Đức Kinh' : slug === 'dong-chu-liet-quoc' ? 'Đông Chu Liệt Quốc' : mockNovel.title,
+      author: slug === 'dao-duc-kinh' ? 'Lão Tử' : slug === 'dong-chu-liet-quoc' ? 'Phùng Mộng Long' : mockNovel.author,
+    };
   }
 }
 
 export async function getChapter(slug: string, chapterNumber: number): Promise<Chapter> {
   try {
     const apiChapter = await fetchApi<any>(`/chapters/${slug}/${chapterNumber}`);
+    
+    // Nếu backend trả về htmlContent, ta có thể split thành các đoạn văn hoặc giữ nguyên
+    // Để tương thích với kiểu string[] của giao diện cũ (nếu có dùng), ta split theo thẻ p.
+    // Tuy nhiên, đa số trang mới đã dùng dangerouslySetInnerHTML trực tiếp.
+    let textParagraphs: string[] = [];
+    if (apiChapter.htmlContent) {
+      // Tách các đoạn văn thô sơ từ htmlContent
+      textParagraphs = apiChapter.htmlContent
+        .replace(/<[^>]*>/g, '\n')
+        .split('\n')
+        .map((p: string) => p.trim())
+        .filter((p: string) => p.length > 0);
+    }
+
     return {
-      id: apiChapter.id,
-      chapterNumber: apiChapter.chapterNumber,
-      title: apiChapter.title,
-      content: apiChapter.content, 
+      id: apiChapter.chapter.id,
+      chapterNumber: apiChapter.chapter.chapterNum,
+      title: apiChapter.chapter.title,
+      content: textParagraphs.length > 0 ? textParagraphs : [apiChapter.htmlContent || ''], 
     };
   } catch (err) {
+    console.warn(`[Mặc Quán] Không thể gọi API chương ${chapterNumber} cho slug ${slug}, sử dụng fallback.`, err);
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const chapter = mockChapters[chapterNumber];
-        if (chapter) resolve(chapter);
-        else reject(new Error('Chapter not found'));
-      }, 500);
+      const chapter = mockChapters[chapterNumber];
+      if (chapter) resolve(chapter);
+      else reject(new Error('Chương truyện không tồn tại trong hệ thống.'));
     });
   }
 }
 
 export async function getAllNovels(): Promise<Novel[]> {
   try {
-    const apiNovels = await fetchApi<any[]>('/stories/featured'); // Just fetching some stories for mock
+    const apiNovels = await fetchApi<any[]>('/stories/leaderboard'); // Lấy danh sách từ bảng xếp hạng hoặc tương đương
     return apiNovels.map(n => ({
       id: n.id,
       slug: n.slug,
       title: n.title,
-      author: 'Unknown Author',
-      coverUrl: n.coverImage || mockNovel.coverUrl,
+      author: n.author || 'Kim Dung',
+      coverUrl: n.coverUrl || mockNovel.coverUrl,
       description: n.description || '',
       totalChapters: 0, 
       chapters: [],
     }));
   } catch (err) {
+    console.warn('[Mặc Quán] Không thể gọi danh sách tác phẩm, sử dụng dữ liệu tĩnh.', err);
     return [
       mockNovel,
       {
         ...mockNovel,
-        id: 'nov_2',
-        slug: 'cybernetic-dawn',
-        title: 'Cybernetic Dawn',
-        coverUrl: 'https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=1000&auto=format&fit=crop',
+        id: 'nov_dao_duc',
+        slug: 'dao-duc-kinh',
+        title: 'Đạo Đức Kinh',
+        author: 'Lão Tử',
+        coverUrl: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1200&auto=format&fit=crop',
+        description: 'Tác phẩm triết học kinh điển Đông Phương của hiền triết Lão Tử, nền tảng của Đạo giáo. Sách gồm 81 chương lý giải về bản nguyên vũ trụ và lẽ sống tĩnh lặng vô vi.',
       },
       {
         ...mockNovel,
-        id: 'nov_3',
-        slug: 'obsidian-echoes',
-        title: 'Obsidian Echoes',
-        coverUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop',
+        id: 'nov_dong_chu',
+        slug: 'dong-chu-liet-quoc',
+        title: 'Đông Chu Liệt Quốc',
+        author: 'Phùng Mộng Long',
+        coverUrl: 'https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop',
+        description: 'Bộ tiểu thuyết lịch sử đồ sộ phản ánh giai đoạn đầy biến động Xuân Thu Chiến Quốc của Trung Hoa cổ đại với các mưu lược và điển tích hào hùng.',
       }
     ];
   }
 }
 
 export async function getAdjacentChapters(slug: string, chapterNumber: number) {
-  const novel = await getNovel(slug);
-  const currentIndex = novel.chapters.findIndex(c => c.chapterNumber === chapterNumber);
-  
-  if (currentIndex === -1) {
-    return { prev: null, next: null };
-  }
-  
-  const prev = currentIndex > 0 ? novel.chapters[currentIndex - 1] : null;
-  const next = currentIndex < novel.chapters.length - 1 ? novel.chapters[currentIndex + 1] : null;
+  try {
+    const apiChapter = await fetchApi<any>(`/chapters/${slug}/${chapterNumber}`);
+    return {
+      prev: apiChapter.prevChapterNum ? { number: apiChapter.prevChapterNum } : null,
+      next: apiChapter.nextChapterNum ? { number: apiChapter.nextChapterNum } : null,
+    };
+  } catch (err) {
+    // Nếu API lỗi, fallback sang cơ chế offline
+    const novel = await getNovel(slug);
+    const currentIndex = novel.chapters.findIndex(c => c.chapterNumber === chapterNumber);
+    
+    if (currentIndex === -1) {
+      return { prev: null, next: null };
+    }
+    
+    const prev = currentIndex > 0 ? novel.chapters[currentIndex - 1] : null;
+    const next = currentIndex < novel.chapters.length - 1 ? novel.chapters[currentIndex + 1] : null;
 
-  return {
-    prev: prev ? { number: prev.chapterNumber } : null,
-    next: next ? { number: next.chapterNumber } : null,
-  };
+    return {
+      prev: prev ? { number: prev.chapterNumber } : null,
+      next: next ? { number: next.chapterNumber } : null,
+    };
+  }
 }
