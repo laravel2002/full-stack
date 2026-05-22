@@ -46,9 +46,13 @@ export function Navbar() {
 
         {/* Hộp hành động góc phải (Tìm kiếm & Đọc ngay) */}
         <div className="flex items-center gap-4">
-          <button className="rounded-full p-2 text-zen-ink/75 hover:bg-zen-muted/50 hover:text-zen-cinnabar transition-all duration-200">
+          <Link
+            href="/explore"
+            className="rounded-full p-2 text-zen-ink/75 hover:bg-zen-muted/50 hover:text-zen-cinnabar transition-all duration-200"
+            aria-label="Tìm kiếm truyện"
+          >
             <Search className="h-5 w-5 stroke-[1.5]" />
-          </button>
+          </Link>
           
           <Link
             href="/story/thien-long-bat-bo"
