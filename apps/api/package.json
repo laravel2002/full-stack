@@ -10,7 +10,12 @@
   },
   "dependencies": {
     "@novel-platform/db": "*",
-    "next": "16.2.6"
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3",
+    "next": "16.2.6",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^20",
