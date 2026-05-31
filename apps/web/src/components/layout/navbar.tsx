@@ -2,8 +2,19 @@
 
 import Link from 'next/link';
 import { BookOpen, Award, Compass, Search } from 'lucide-react';
+import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 export function Navbar() {
+  const { user, logout } = useAuthStore();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  };
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zen-muted/30 bg-zen-paper/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -44,7 +55,7 @@ export function Navbar() {
           </Link>
         </nav>
 
-        {/* Hộp hành động góc phải (Tìm kiếm & Đọc ngay) */}
+        {/* Hộp hành động góc phải (Tìm kiếm & Auth) */}
         <div className="flex items-center gap-4">
           <Link
             href="/explore"
@@ -54,12 +65,51 @@ export function Navbar() {
             <Search className="h-5 w-5 stroke-[1.5]" />
           </Link>
           
-          <Link
-            href="/story/thien-long-bat-bo"
-            className="hidden sm:inline-flex items-center justify-center rounded-full bg-zen-cinnabar px-5 py-2 text-sm font-medium text-zen-paper hover:bg-opacity-90 shadow-sm transition-all duration-200 hover:scale-[1.02]"
-          >
-            Đọc Ngay
-          </Link>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button variant="ghost" className="relative h-9 w-9 rounded-full bg-zen-muted/30">
+                  <span className="font-medium text-zen-ink">{user.name?.charAt(0).toUpperCase() || user.email.charAt(0).toUpperCase()}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end">
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">{user.name || user.email}</p>
+                    <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => router.push('/profile')}>
+                  Tủ sách của tôi
+                </DropdownMenuItem>
+                {user.role === 'ADMIN' && (
+                  <DropdownMenuItem onClick={() => router.push('/admin')}>
+                    Quản trị viên
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="text-red-600">
+                  Đăng xuất
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <div className="hidden sm:flex items-center gap-2">
+              <Link
+                href="/login"
+                className="text-sm font-medium text-zen-ink hover:text-zen-cinnabar transition-colors"
+              >
+                Đăng nhập
+              </Link>
+              <Link
+                href="/register"
+                className="items-center justify-center rounded-full bg-zen-cinnabar px-5 py-2 text-sm font-medium text-zen-paper hover:bg-opacity-90 shadow-sm transition-all duration-200 hover:scale-[1.02]"
+              >
+                Đăng ký
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </header>
