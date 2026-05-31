@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, DynamicModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
@@ -9,21 +9,28 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { CrawlerModule } from './crawler/crawler.module';
 
+const imports: any[] = [
+  PrismaModule,
+  R2Module,
+  StoryModule,
+  ChapterModule,
+  // Cấu hình Rate Limiting: Giới hạn tối đa 100 requests mỗi 60,000ms (1 phút) toàn cục
+  ThrottlerModule.forRoot([
+    {
+      ttl: 60000,
+      limit: 100,
+    },
+  ]),
+];
+
+// Chỉ nạp CrawlerModule khi đang chạy trên máy tính (local)
+// Render tự động set NODE_ENV=production, do đó Crawler sẽ tự động bị tắt khi đưa lên mạng
+if (process.env.NODE_ENV !== 'production') {
+  imports.push(CrawlerModule);
+}
+
 @Module({
-  imports: [
-    PrismaModule,
-    R2Module,
-    StoryModule,
-    ChapterModule,
-    // Cấu hình Rate Limiting: Giới hạn tối đa 100 requests mỗi 60,000ms (1 phút) toàn cục
-    ThrottlerModule.forRoot([
-      {
-        ttl: 60000,
-        limit: 100,
-      },
-    ]),
-    CrawlerModule,
-  ],
+  imports,
   controllers: [AppController],
   providers: [
     AppService,

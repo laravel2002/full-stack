@@ -84,14 +84,17 @@ export class CrawlerService {
               data: { storyId: story.id, chapterNum, title: chapterInfo.title, storagePath: objectKey }
             });
           } catch (err) {
-            this.logger.error(`Lỗi cào chương ${chapterNum}: ${err.message}`);
+            this.logger.error(`❌ Lỗi cào chương ${chapterNum}: ${err.message}`);
           }
-        });
+        }); // Kết thúc batch.map
+
+        // Chờ toàn bộ batch chạy xong
         await Promise.all(batchPromises);
-        if (i + BATCH_SIZE < validChapters.length) {
-          await new Promise(r => setTimeout(r, 1000));
-        }
+
+        // Nghỉ 500ms giữa mỗi đợt cào (batch) để server không bị block và nhả RAM
+        await new Promise(r => setTimeout(r, 500));
       }
+
       this.logger.log(`Đã hoàn tất cào truyện ${title}!`);
     } catch (error) {
       this.logger.error(`Lỗi Crawler: ${error.message}`);
