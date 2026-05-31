@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { Readable } from 'stream';
 
 @Injectable()
@@ -82,6 +82,53 @@ export class R2Service {
       );
       // Cơ chế dự phòng an toàn giúp ứng dụng không bị lỗi ngắt quãng
       return this.getZenFallbackHtml();
+    }
+  }
+
+  /**
+   * Phương thức tải lên nội dung chương HTML lên Cloudflare R2
+   * @param objectKey Đường dẫn (key) để lưu trên R2 (vd: stories/slug/chapters/1.html)
+   * @param htmlContent Nội dung HTML
+   * @returns URL hoặc Object Key sau khi upload thành công
+   */
+  async uploadChapterHtml(objectKey: string, htmlContent: string): Promise<string> {
+    try {
+      const command = new PutObjectCommand({
+        Bucket: this.bucketName,
+        Key: objectKey,
+        Body: htmlContent,
+        ContentType: 'text/html; charset=utf-8',
+      });
+
+      await this.s3Client.send(command);
+      this.logger.log(`Tải lên thành công: ${objectKey}`);
+      return objectKey;
+    } catch (error) {
+      this.logger.error(`Lỗi khi tải lên R2 [${objectKey}]: ${error.message}`);
+      throw error;
+    }
+  }
+
+  /**
+   * Phương thức tải lên nội dung chương dạng JSON lên Cloudflare R2
+   * @param objectKey Đường dẫn (key) để lưu trên R2 (vd: stories/slug/chapters/1.json)
+   * @param jsonData Nội dung object JSON
+   */
+  async uploadChapterJson(objectKey: string, jsonData: any): Promise<string> {
+    try {
+      const command = new PutObjectCommand({
+        Bucket: this.bucketName,
+        Key: objectKey,
+        Body: JSON.stringify(jsonData, null, 2),
+        ContentType: 'application/json; charset=utf-8',
+      });
+
+      await this.s3Client.send(command);
+      this.logger.log(`Tải lên thành công: ${objectKey}`);
+      return objectKey;
+    } catch (error) {
+      this.logger.error(`Lỗi khi tải lên R2 [${objectKey}]: ${error.message}`);
+      throw error;
     }
   }
 

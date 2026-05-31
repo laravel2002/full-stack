@@ -7,6 +7,7 @@ import { StoryModule } from './story/story.module';
 import { ChapterModule } from './chapter/chapter.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { CrawlerModule } from './crawler/crawler.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { APP_GUARD } from '@nestjs/core';
         limit: 100,
       },
     ]),
+    CrawlerModule,
   ],
   controllers: [AppController],
   providers: [
